@@ -1,0 +1,34 @@
+{
+  "name": "deploy-cli-yuki-service",
+  "version": "1.0.0",
+  "description": "前端一键自动化部署, 可选择性上传文件，适用于服务端项目，比如nuxt/next脚手架服务",
+  "main": "lib/service.js",
+  "homepage": "https://github.com/Yukixieyuya821/deploy-cli-yuki-service",
+  "author": {
+    "name": "yukixy"
+  },
+  "keywords": [
+    "deploy",
+    "cli",
+    "ssr"
+  ],
+  "bin": {
+    "deploy-cli-yuki-service": "bin/deploy-cli-service.js"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yukixieyuya821/deploy-cli-yuki-service"
+  },
+  "dependencies": {
+    "archiver": "^5.0.2",
+    "chalk": "^4.1.0",
+    "commander": "^6.1.0",
+    "dayjs": "^1.10.4",
+    "inquirer": "^7.3.3",
+    "minimist": "^1.2.5",
+    "node-ssh": "^11.0.0",
+    "ora": "^5.1.0",
+    "prettier": "^2.1.1"
+  }
+}
