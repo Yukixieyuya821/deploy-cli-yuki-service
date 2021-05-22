@@ -81,16 +81,16 @@ module.exports = {
     port: 22, // 服务器端口号
     username: 'root', // 服务器登录用户名
     password: '123456', // 服务器登录密码
-    distPath: 'dist', // 本地打包生成目录
+    distPath: 'dist', // 本地打包生成目录， 当isAll为true时，且打包生成目录带. 如.nuxt/.next, 则为必填项
     webDir: '/usr/local/nginx/html', // 服务器部署路径（不可为空或'/'）
     bakDir: '/usr/local/nginx/backup', // 备份路径 (打包前备份之前部署目录 最终备份路径为 /usr/local/nginx/backup/html.zip)  批量打包上传暂不支持备份
     isRemoveRemoteFile: true, // 是否删除远程文件（默认true）
     isRemoveLocalFile: true, // 是否删除本地文件（默认true）
-    isAll: true, // 是否选择项目下所有文件夹打包， 启用则(webDir, bakDir, distPath)字段失效,排除带.的（比如.git）以及node_modules文件夹
-    exclude: ['src'], // isAll为true时有效, 指定不打包上传的文件夹
+    isAll: true, // 是否选择项目下所有文件夹打包， 启用则(webDir, bakDir)字段失效,排除带.的（比如.git）以及node_modules文件夹
+    exclude: ["README.md"], // isAll为true时有效, 指定不打包上传的文件（仅仅是文件，对文件夹不起作用）
     webPath: "/var/webapp/test", // isAll为true时有效, 上传文件到服务器的路径
-    attachUploadFiles: ["package.json", "yarn.lock"], // isAll为true时有效， 选择项目下指定文件上传，不打包，直接上传至服务器webPath下
-    install: "npm install" // isAll为true时有效, 远程安装依赖命令
+    install: "npm install", // isAll为true时有效, 远程安装依赖命令
+    startRemoteProgress: "npm start" // isAll为true时有效, 远程启动命令，比如pm2
   },
   test: {
     // 环境对象
@@ -100,16 +100,16 @@ module.exports = {
     port: 22, // 服务器端口号
     username: 'root', // 服务器登录用户名
     password: '123456', // 服务器登录密码
-    distPath: 'dist', // 本地打包生成目录
+    distPath: 'dist', // 本地打包生成目录， 当isAll为true时，且打包生成目录带. 如.nuxt/.next, 则为必填项
     webDir: '/usr/local/nginx/html', // 服务器部署路径（不可为空或'/'）
     bakDir: '/usr/local/nginx/backup', // 备份路径 (打包前备份之前部署目录 最终备份路径为 /usr/local/nginx/backup/html.zip)  批量打包上传暂不支持备份
     isRemoveRemoteFile: true, // 是否删除远程文件（默认true）
     isRemoveLocalFile: true, // 是否删除本地文件（默认true）
-    isAll: true, // 是否选择项目下所有文件夹打包， 启用则(webDir, bakDir, distPath)字段失效,排除带.的（比如.git）以及node_modules文件夹
-    exclude: ['src'], // isAll为true时有效, 指定不打包上传的文件夹
+    isAll: true, // 是否选择项目下所有文件夹打包， 启用则(webDir, bakDir)字段失效,排除带.的（比如.git）以及node_modules文件夹
+    exclude: ["README.md"], // isAll为true时有效, 指定不打包上传的文件（仅仅是文件，对文件夹不起作用）
     webPath: "/var/webapp/test", // isAll为true时有效, 上传文件到服务器的路径
-    attachUploadFiles: ["package.json", "yarn.lock"], // isAll为true时有效， 选择项目下指定文件上传，不打包，直接上传至服务器webPath下
-    install: "npm install" // isAll为true时有效, 远程安装依赖命令
+    install: "npm install", // isAll为true时有效, 远程安装依赖命令
+    startRemoteProgress: "npm start" // isAll为true时有效, 远程启动命令，比如pm2
   },
   prod: {
     // 环境对象
@@ -119,16 +119,16 @@ module.exports = {
     port: 22, // 服务器端口号
     username: 'root', // 服务器登录用户名
     password: '123456', // 服务器登录密码
-    distPath: 'dist', // 本地打包生成目录
+    distPath: 'dist', // 本地打包生成目录， 当isAll为true时，且打包生成目录带. 如.nuxt/.next, 则为必填项
     webDir: '/usr/local/nginx/html', // 服务器部署路径（不可为空或'/'）
     bakDir: '/usr/local/nginx/backup', // 备份路径 (打包前备份之前部署目录 最终备份路径为 /usr/local/nginx/backup/html.zip) 批量打包上传暂不支持备份
     isRemoveRemoteFile: true, // 是否删除远程文件（默认true）
     isRemoveLocalFile: true, // 是否删除本地文件（默认true）
-    isAll: true, // 是否选择项目下所有文件夹打包， 启用则(webDir, bakDir, distPath)字段失效,排除带.的（比如.git）以及node_modules文件夹
-    exclude: ['src'], // isAll为true时有效, 指定不打包上传的文件夹
+    isAll: true, // 是否选择项目下所有文件夹打包， 启用则(webDir, bakDir)字段失效,排除带.的（比如.git）以及node_modules文件夹
+    exclude: ["README.md"], // isAll为true时有效, 指定不打包上传的文件（仅仅是文件，对文件夹不起作用）
     webPath: "/var/webapp/test", // isAll为true时有效, 上传文件到服务器的路径
-    attachUploadFiles: ["package.json", "yarn.lock"], // isAll为true时有效， 选择项目下指定文件上传，不打包，直接上传至服务器webPath下
-    install: "npm install" // isAll为true时有效, 远程安装依赖命令
+    install: "npm install", // isAll为true时有效, 远程安装依赖命令
+    startRemoteProgress: "npm start" // isAll为true时有效, 远程启动命令，比如pm2
   }
 }
 ```
