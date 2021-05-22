@@ -4,10 +4,10 @@ const config = {
     dev: {
       name: "dev-h5",
       script: "yarn build",
-      host: "172.16.16.45",
+      host: "127.0.0.1",
       port: 22,
       username: "root",
-      password: "Heg@local_life",
+      password: "123",
       distPath: ".nuxt",
       webDir: "/var/webapp/vue-nuxt/.nuxt",
       bakDir: "/var/webapp/vue-nuxt/backup",
@@ -15,9 +15,13 @@ const config = {
       isRemoveLocalFile: true,
       isAll: true,
       exclude: [],
-      attachUploadFiles: ["package.json", "yarn.lock"],
       webPath: "/var/webapp/test",
-      install: "yarn"
+      isRemoteDeploy: true,
+      cloneScript: "git clone git@gitlab.***.com:***/***.git",
+      webProjectPath: "/var/webapp/test",
+      downloadDirName: "***",
+      install: "yarn",
+      startRemoteProgress: "yarn start",
     }
   };
   
