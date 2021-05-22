@@ -1,12 +1,12 @@
 # 来源
-本项目基于deploy-cli-service， 迭代功能， 可批量处理部署。
+本项目基于deploy-cli-service， csr部署，ssr部署(批量打包上传)， 远程部署，自启动服务, 
 
 感谢deploy-cli-service作者！！！
 # deploy-cli-yuki-service
 
 前端一键自动化部署脚手架服务，支持开发、测试、生产多环境配置。
 
-可选择性上传文件，适用于服务端项目，比如nuxt/next脚手架服务。
+csr部署，ssr部署(批量打包上传)，远程部署，可适用于服务端项目，比如nuxt/next脚手架服务。
 
 支持批量打包Zip,批量上传，配置好后一键即可自动完成部署。
 
@@ -89,6 +89,10 @@ module.exports = {
     isAll: true, // 是否选择项目下所有文件夹打包， 启用则(webDir, bakDir)字段失效,排除带.的（比如.git）以及node_modules文件夹
     exclude: ["README.md"], // isAll为true时有效, 指定不打包上传的文件（仅仅是文件，对文件夹不起作用）
     webPath: "/var/webapp/test", // isAll为true时有效, 上传文件到服务器的路径
+    isRemoteDeploy: true, // 是否选择支持远程下载项目（默认true），启用则isAll本地项目打包部署失效。以git为例，需要服务器安装git,并能直接下载,无需输入账号密码才能下载，最好使用ssh密钥
+    cloneScript: 'git clone git@github...', // isRemoteDeploy为true时有效， 下载项目命令，比如git clone @github....
+    webProjectPath: '/usr/local', // // isRemoteDeploy为true时有效， 下载项目到远程服务器的路径
+    downloadDirName: 'test', // // isRemoteDeploy为true时有效， 下载项目到远程服务器的默认文件夹名称
     install: "npm install", // isAll为true时有效, 远程安装依赖命令
     startRemoteProgress: "npm start" // isAll为true时有效, 远程启动命令，比如pm2
   },
@@ -108,6 +112,10 @@ module.exports = {
     isAll: true, // 是否选择项目下所有文件夹打包， 启用则(webDir, bakDir)字段失效,排除带.的（比如.git）以及node_modules文件夹
     exclude: ["README.md"], // isAll为true时有效, 指定不打包上传的文件（仅仅是文件，对文件夹不起作用）
     webPath: "/var/webapp/test", // isAll为true时有效, 上传文件到服务器的路径
+    isRemoteDeploy: true, // 是否选择支持远程下载项目（默认true）, 启用则isAll本地项目打包部署失效。以git为例，需要服务器安装git,并能直接下载,无需输入账号密码才能下载，最好使用ssh密钥
+    cloneScript: 'git clone git@github...', // isRemoteDeploy为true时有效， 下载项目命令，比如git clone @github....
+    webProjectPath: '/usr/local', // // isRemoteDeploy为true时有效，下载项目到远程服务器的路径
+    downloadDirName: 'test', // // isRemoteDeploy为true时有效，下载项目到远程服务器的默认文件夹名称
     install: "npm install", // isAll为true时有效, 远程安装依赖命令
     startRemoteProgress: "npm start" // isAll为true时有效, 远程启动命令，比如pm2
   },
@@ -127,6 +135,10 @@ module.exports = {
     isAll: true, // 是否选择项目下所有文件夹打包， 启用则(webDir, bakDir)字段失效,排除带.的（比如.git）以及node_modules文件夹
     exclude: ["README.md"], // isAll为true时有效, 指定不打包上传的文件（仅仅是文件，对文件夹不起作用）
     webPath: "/var/webapp/test", // isAll为true时有效, 上传文件到服务器的路径
+    isRemoteDeploy: true, // 是否选择支持远程下载项目（默认true），启用则isAll本地项目打包部署失效。以git为例，需要服务器安装git,并能直接下载,无需输入账号密码才能下载，最好使用ssh密钥
+    cloneScript: 'git clone git@github...', // isRemoteDeploy为true时有效， 下载项目命令，比如git clone @github....
+    webProjectPath: '/usr/local', // // isRemoteDeploy为true时有效， 下载项目到远程服务器的路径
+    downloadDirName: 'test', // // isRemoteDeploy为true时有效， 下载项目到远程服务器的默认文件夹名称
     install: "npm install", // isAll为true时有效, 远程安装依赖命令
     startRemoteProgress: "npm start" // isAll为true时有效, 远程启动命令，比如pm2
   }
