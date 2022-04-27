@@ -11,6 +11,7 @@ const config = {
       distPath: ".nuxt",
       webDir: "/var/webapp/vue-nuxt/.nuxt",
       bakDir: "/var/webapp/vue-nuxt/backup",
+      maxBackupVersionCount: 3,
       isRemoveRemoteFile: true,
       isRemoveLocalFile: true,
       isAll: true,

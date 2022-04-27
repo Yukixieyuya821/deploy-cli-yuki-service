@@ -1,12 +1,12 @@
 # 来源
-本项目基于deploy-cli-service， csr部署，ssr部署(批量打包上传)， 远程部署，自启动服务, 
+本项目基于deploy-cli-service， csr部署，ssr部署(批量打包上传)， 指定版本回滚(暂支持本地化部署， 通过远程服务器部署暂不支持)， 远程部署，自启动服务, 
 
 感谢deploy-cli-service作者！！！
 # deploy-cli-yuki-service
 
 前端一键自动化部署脚手架服务，支持开发、测试、生产多环境配置。
 
-csr部署，ssr部署(批量打包上传)，远程部署，可适用于服务端项目，比如nuxt/next脚手架服务。
+csr部署，ssr部署(批量打包上传)，远程部署，可指定版本回滚，可适用于服务端项目，比如nuxt/next脚手架服务。
 
 支持批量打包Zip,批量上传，配置好后一键即可自动完成部署。
 
@@ -83,14 +83,15 @@ module.exports = {
     password: '123456', // 服务器登录密码
     distPath: 'dist', // 本地打包生成目录， 当isAll为true时，且打包生成目录带. 如.nuxt/.next, 则为必填项
     webDir: '/usr/local/nginx/html', // 服务器部署路径（不可为空或'/'）
-    bakDir: '/usr/local/nginx/backup', // 备份路径 (打包前备份之前部署目录 最终备份路径为 /usr/local/nginx/backup/html.zip)  批量打包上传暂不支持备份
+    bakDir: '/usr/local/nginx/backup', // 备份路径 (打包前备份之前部署目录 最终备份路径为 /usr/local/nginx/backup/html.zip)  // 批量上传部署（ssr项目）最终备份路径为 /usr/local/nginx/backup/backup_{时间戳}/{file/zipFile}
+    maxBackupVersionCount: 3, //最多可存储的备份版本数, default 3
     isRemoveRemoteFile: true, // 是否删除远程文件（默认true）
     isRemoveLocalFile: true, // 是否删除本地文件（默认true）
     isAll: true, // 是否选择项目下所有文件夹打包， 启用则(webDir, bakDir)字段失效,排除带.的（比如.git）以及node_modules文件夹
     exclude: ["README.md"], // isAll为true时有效, 指定不打包上传的文件（仅仅是文件，对文件夹不起作用）
     webPath: "/var/webapp/test", // isAll为true时有效, 上传文件到服务器的路径
     isRemoteDeploy: true, // 是否选择支持远程下载项目（默认true），启用则isAll本地项目打包部署失效。以git为例，需要服务器安装git,并能直接下载,无需输入账号密码才能下载，最好使用ssh密钥
-    cloneScript: 'git clone git@github...', // isRemoteDeploy为true时有效， 下载项目命令，比如git clone @github....
+    cloneScript: 'git clone @github...', // isRemoteDeploy为true时有效， 下载项目命令，比如git clone @github....
     webProjectPath: '/usr/local', // // isRemoteDeploy为true时有效， 下载项目到远程服务器的路径
     downloadDirName: 'test', // // isRemoteDeploy为true时有效， 下载项目到远程服务器的默认文件夹名称
     install: "npm install", // isAll为true时有效, 远程安装依赖命令
@@ -106,14 +107,15 @@ module.exports = {
     password: '123456', // 服务器登录密码
     distPath: 'dist', // 本地打包生成目录， 当isAll为true时，且打包生成目录带. 如.nuxt/.next, 则为必填项
     webDir: '/usr/local/nginx/html', // 服务器部署路径（不可为空或'/'）
-    bakDir: '/usr/local/nginx/backup', // 备份路径 (打包前备份之前部署目录 最终备份路径为 /usr/local/nginx/backup/html.zip)  批量打包上传暂不支持备份
+    bakDir: '/usr/local/nginx/backup', // 备份路径 (打包前备份之前部署目录 最终备份路径为 /usr/local/nginx/backup/html.zip)  // 批量上传部署（ssr项目）最终备份路径为 /usr/local/nginx/backup/backup_{时间戳}/{file/zipFile}
+    maxBackupVersionCount: 3, //最多可存储的备份版本数, default 3
     isRemoveRemoteFile: true, // 是否删除远程文件（默认true）
     isRemoveLocalFile: true, // 是否删除本地文件（默认true）
     isAll: true, // 是否选择项目下所有文件夹打包， 启用则(webDir, bakDir)字段失效,排除带.的（比如.git）以及node_modules文件夹
     exclude: ["README.md"], // isAll为true时有效, 指定不打包上传的文件（仅仅是文件，对文件夹不起作用）
     webPath: "/var/webapp/test", // isAll为true时有效, 上传文件到服务器的路径
     isRemoteDeploy: true, // 是否选择支持远程下载项目（默认true）, 启用则isAll本地项目打包部署失效。以git为例，需要服务器安装git,并能直接下载,无需输入账号密码才能下载，最好使用ssh密钥
-    cloneScript: 'git clone git@github...', // isRemoteDeploy为true时有效， 下载项目命令，比如git clone @github....
+    cloneScript: 'git clone @github...', // isRemoteDeploy为true时有效， 下载项目命令，比如git clone @github....
     webProjectPath: '/usr/local', // // isRemoteDeploy为true时有效，下载项目到远程服务器的路径
     downloadDirName: 'test', // // isRemoteDeploy为true时有效，下载项目到远程服务器的默认文件夹名称
     install: "npm install", // isAll为true时有效, 远程安装依赖命令
@@ -129,14 +131,15 @@ module.exports = {
     password: '123456', // 服务器登录密码
     distPath: 'dist', // 本地打包生成目录， 当isAll为true时，且打包生成目录带. 如.nuxt/.next, 则为必填项
     webDir: '/usr/local/nginx/html', // 服务器部署路径（不可为空或'/'）
-    bakDir: '/usr/local/nginx/backup', // 备份路径 (打包前备份之前部署目录 最终备份路径为 /usr/local/nginx/backup/html.zip) 批量打包上传暂不支持备份
+    bakDir: '/usr/local/nginx/backup', // 备份路径 (打包前备份之前部署目录 最终备份路径为 /usr/local/nginx/backup/html.zip) // 批量上传部署（ssr项目）最终备份路径为 /usr/local/nginx/backup/backup_{时间戳}/{file/zipFile}
+    maxBackupVersionCount: 3, //最多可存储的备份版本数, default 3
     isRemoveRemoteFile: true, // 是否删除远程文件（默认true）
     isRemoveLocalFile: true, // 是否删除本地文件（默认true）
     isAll: true, // 是否选择项目下所有文件夹打包， 启用则(webDir, bakDir)字段失效,排除带.的（比如.git）以及node_modules文件夹
     exclude: ["README.md"], // isAll为true时有效, 指定不打包上传的文件（仅仅是文件，对文件夹不起作用）
     webPath: "/var/webapp/test", // isAll为true时有效, 上传文件到服务器的路径
     isRemoteDeploy: true, // 是否选择支持远程下载项目（默认true），启用则isAll本地项目打包部署失效。以git为例，需要服务器安装git,并能直接下载,无需输入账号密码才能下载，最好使用ssh密钥
-    cloneScript: 'git clone git@github...', // isRemoteDeploy为true时有效， 下载项目命令，比如git clone @github....
+    cloneScript: 'git clone @github...', // isRemoteDeploy为true时有效， 下载项目命令，比如git clone @github....
     webProjectPath: '/usr/local', // // isRemoteDeploy为true时有效， 下载项目到远程服务器的路径
     downloadDirName: 'test', // // isRemoteDeploy为true时有效， 下载项目到远程服务器的默认文件夹名称
     install: "npm install", // isAll为true时有效, 远程安装依赖命令
@@ -186,7 +189,10 @@ deploy-cli-yuki-service deploy # 或者使用 deploy-cli-yuki-service d
   "deploy": "deploy-cli-yuki-service deploy",
   "deploy:dev": "deploy-cli-yuki-service deploy --mode dev",
   "deploy:test": "deploy-cli-yuki-service deploy --mode test",
-  "deploy:prod": "deploy-cli-yuki-service deploy --mode prod"
+  "deploy:prod": "deploy-cli-yuki-service deploy --mode prod",
+  "rollback:dev": "deploy-cli-yuki-service rollback --mode dev",
+  "rollback:test": "deploy-cli-yuki-service rollback --mode test",
+  "rollback:prod": "deploy-cli-yuki-service rollback --mode prod"
 }
 ```
 

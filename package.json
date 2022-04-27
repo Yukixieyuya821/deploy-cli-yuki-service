@@ -1,7 +1,7 @@
 {
   "name": "deploy-cli-yuki-service",
-  "version": "1.0.0",
-  "description": "前端一键自动化部署, 可选择性上传文件，适用于服务端项目，比如nuxt/next脚手架服务",
+  "version": "1.3.2",
+  "description": "前端一键自动化部署, 可选择性上传文件，指定版本回滚，适用于服务端项目，比如nuxt/next脚手架服务",
   "main": "lib/service.js",
   "homepage": "https://github.com/Yukixieyuya821/deploy-cli-yuki-service",
   "author": {
@@ -9,6 +9,7 @@
   },
   "keywords": [
     "deploy",
+    "rollback",
     "cli",
     "ssr"
   ],
